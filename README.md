@@ -2,7 +2,7 @@
 
 ## IT3040 Assignment 1
 
-This project contains automated tests for the Singlish to Sinhala translator at [SwiftTranslator](https://www.swifttranslator.com/) using Playwright.
+This project contains automated tests for the AI-powered Singlish to Sinhala translator at [Singlish2Sinhala](https://www.singlish2sinhala.app/) using Playwright.
 
 ---
 
@@ -137,7 +137,7 @@ The `TestCases.csv` file contains:
 Edit `playwright.config.js`:
 ```javascript
 timeout: 60000,  // Overall test timeout
-actionTimeout: 10000,  // Individual action timeout
+actionTimeout: 15000,  // Individual action timeout (AI delay)
 ```
 
 ### Modifying Test Data
@@ -146,8 +146,8 @@ Edit `tests/test-data.json` to add/modify test cases.
 ### Adjusting Selectors
 If website structure changes, update selectors in `tests/utils/helpers.js`:
 ```javascript
-const inputSelector = 'textarea[placeholder*="Singlish"]';
-const outputSelector = 'textarea[placeholder*="Sinhala"]';
+const inputSelector = 'textarea[placeholder="Type in Singlish here..."]';
+const outputSelector = 'div:below(:text("OUTPUT")) span';
 ```
 
 ---
