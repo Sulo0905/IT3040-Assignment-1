@@ -1,0 +1,463 @@
+{
+    "positive_functional": [
+        {
+            "id": "Pos_Fun_0001",
+            "name": "Basic verb - running",
+            "input": "mama dhuwanawaa",
+            "expected": "මම දුවනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Daily activity",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0002",
+            "name": "Simple farewell",
+            "input": "gihin ennam",
+            "expected": "ගිහින් එන්නම්",
+            "lengthType": "S",
+            "coverage": [
+                "Farewell",
+                "Simple sentence / Future tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0003",
+            "name": "Asking about food",
+            "input": "kaama tiyenawada?",
+            "expected": "කෑම තියෙනවද?",
+            "lengthType": "S",
+            "coverage": [
+                "Question / Food",
+                "Interrogative (question)",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0004",
+            "name": "Stating location - market",
+            "input": "mama poLa giya",
+            "expected": "මම පොළ ගියා",
+            "lengthType": "S",
+            "coverage": [
+                "Daily conversation / Place",
+                "Past tense / Singular pronoun",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0005",
+            "name": "Weather description",
+            "input": "adha wessa wenawaa",
+            "expected": "අද වැස්ස වෙනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Weather / Daily conversation",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0006",
+            "name": "Expressing like",
+            "input": "mata meka kamathiyee",
+            "expected": "මට මේක කැමතියි",
+            "lengthType": "S",
+            "coverage": [
+                "Emotion / Preference",
+                "Simple sentence / Expressing feeling",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0007",
+            "name": "Writing action",
+            "input": "mama liyanawaa",
+            "expected": "මම ලියනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Daily activity",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0008",
+            "name": "Question - what",
+            "input": "mokadha?",
+            "expected": "මොකද?",
+            "lengthType": "S",
+            "coverage": [
+                "Question",
+                "Interrogative (what)",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0009",
+            "name": "Question - why",
+            "input": "aeyi?",
+            "expected": "ඇයි?",
+            "lengthType": "S",
+            "coverage": [
+                "Question",
+                "Interrogative (why)",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0010",
+            "name": "Agreeing - yes okay",
+            "input": "ow hondha",
+            "expected": "ඔව් හොඳ",
+            "lengthType": "S",
+            "coverage": [
+                "Response / Agreement",
+                "Simple sentence",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0011",
+            "name": "Cooking action",
+            "input": "amma uyanawaa",
+            "expected": "අම්මා උයනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Daily activity / Family",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0012",
+            "name": "Going to work",
+            "input": "thaaththa waradata yanawaa",
+            "expected": "තාත්තා වැරදට යනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Daily conversation / Family",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0013",
+            "name": "Buying something",
+            "input": "mama peena ekak gannawaa",
+            "expected": "මම පීනා එකක් ගන්නවා",
+            "lengthType": "S",
+            "coverage": [
+                "Shopping / Transaction",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0014",
+            "name": "Bathing action",
+            "input": "mama nanawaa",
+            "expected": "මම නානවා",
+            "lengthType": "S",
+            "coverage": [
+                "Daily routine",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0015",
+            "name": "Playing action",
+            "input": "lamayi sellam karanawaa",
+            "expected": "ළමයි සෙල්ලම් කරනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Recreation / Children",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0016",
+            "name": "Singing action",
+            "input": "mama sindu kiyanawaa",
+            "expected": "මම සිංදු කියනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Recreation / Music",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0017",
+            "name": "Sleeping tonight",
+            "input": "mama adha ratee nindhi yanawaa",
+            "expected": "මම අද රාත්‍රියේ නිදි යනවා",
+            "lengthType": "M",
+            "coverage": [
+                "Daily routine / Night",
+                "Simple sentence / Future tense",
+                "M (31-299 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0018",
+            "name": "Coming back soon",
+            "input": "mama ikmanata ennang",
+            "expected": "මම ඉක්මනට එන්නං",
+            "lengthType": "S",
+            "coverage": [
+                "Promise / Response",
+                "Simple sentence / Future tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0019",
+            "name": "Studying hard",
+            "input": "mama godak igena gannawaa",
+            "expected": "මම ගොඩක් ඉගෙන ගන්නවා",
+            "lengthType": "S",
+            "coverage": [
+                "Education / Study",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0020",
+            "name": "Waiting for someone",
+            "input": "mama balan innawaa",
+            "expected": "මම බලන් ඉන්නවා",
+            "lengthType": "S",
+            "coverage": [
+                "Daily conversation",
+                "Present continuous tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0021",
+            "name": "Asking for help",
+            "input": "mata udaw karanna",
+            "expected": "මට උදව් කරන්න",
+            "lengthType": "S",
+            "coverage": [
+                "Request / Help",
+                "Imperative (command)",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0022",
+            "name": "Feeling sick",
+            "input": "mata sarippa naaha",
+            "expected": "මට සැරිප්ප නෑ",
+            "lengthType": "S",
+            "coverage": [
+                "Health / Feeling",
+                "Negative statement",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0023",
+            "name": "Dog is barking",
+            "input": "balla bhuranawaa",
+            "expected": "බල්ලා භුරනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Animals / Nature",
+                "Simple sentence / Present tense",
+                "S (≤30 characters)",
+                "Accuracy validation"
+            ]
+        },
+        {
+            "id": "Pos_Fun_0024",
+            "name": "Telling time - morning",
+            "input": "dhan udee 7 wenawaa",
+            "expected": "දැන් උදේ 7 වෙනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Time / Daily conversation",
+                "Simple sentence / Numbers",
+                "S (≤30 characters)",
+                "Robustness (numbers)"
+            ]
+        }
+    ],
+    "negative_functional": [
+        {
+            "id": "Neg_Fun_0001",
+            "name": "No spaces between all words",
+            "input": "mamabathkaalaagiyaa",
+            "expected": "මම බත් කාලා ගියා",
+            "lengthType": "S",
+            "coverage": [
+                "Edge case / Robustness",
+                "Compound sentence / No spaces",
+                "S (≤30 characters)",
+                "Word boundary handling"
+            ]
+        },
+        {
+            "id": "Neg_Fun_0002",
+            "name": "Random UPPERCASE mixing",
+            "input": "MaMa YaNaWaA gEdArA",
+            "expected": "මම ගෙදර යනවා",
+            "lengthType": "S",
+            "coverage": [
+                "Edge case / Robustness",
+                "Simple sentence / Mixed case",
+                "S (≤30 characters)",
+                "Case sensitivity handling"
+            ]
+        },
+        {
+            "id": "Neg_Fun_0003",
+            "name": "Emoji mixed with Singlish text",
+            "input": "mama happy 😊 ada 🎉🎉🎉 oyaa kohomada 🤔",
+            "expected": "මම සතුටුයි 😊 අද 🎉🎉🎉 ඔයා කොහොමද 🤔",
+            "lengthType": "M",
+            "coverage": [
+                "Edge case / Emoji",
+                "Simple sentence / Non-text characters",
+                "M (31-299 characters)",
+                "Special character handling"
+            ]
+        },
+        {
+            "id": "Neg_Fun_0004",
+            "name": "Pure numbers and symbols only",
+            "input": "123 + 456 = 579 @#$%",
+            "expected": "එකසිය විසිතුන + හාරසිය පනස්හය = පන්සිය හැත්තෑනවය",
+            "lengthType": "S",
+            "coverage": [
+                "Edge case / Non-text",
+                "Numbers and symbols only / No words",
+                "S (≤30 characters)",
+                "Number-only input handling"
+            ]
+        },
+        {
+            "id": "Neg_Fun_0005",
+            "name": "Repeated single word 8 times",
+            "input": "mama mama mama mama mama mama mama mama",
+            "expected": "මම",
+            "lengthType": "M",
+            "coverage": [
+                "Edge case / Repetition",
+                "Repeated single word / Robustness",
+                "M (31-299 characters)",
+                "Repetition handling"
+            ]
+        },
+        {
+            "id": "Neg_Fun_0006",
+            "name": "Full English sentence no Singlish",
+            "input": "The quick brown fox jumps over the lazy dog near the river bank",
+            "expected": "වේගවත් දුඹුරු හිවලා කම්මැලි බල්ලා උඩින් පැන්නා ගං ඉවුරේ ළඟ",
+            "lengthType": "M",
+            "coverage": [
+                "Mixed language / English only",
+                "Complex sentence / No Singlish words",
+                "M (31-299 characters)",
+                "Non-Singlish input handling"
+            ]
+        },
+        {
+            "id": "Neg_Fun_0007",
+            "name": "Heavily misspelled Singlish",
+            "input": "mmma yaannawaaa batth kaaannwa gedhaaraa",
+            "expected": "මම යන්නවා බත් කන්නවා ගෙදර",
+            "lengthType": "M",
+            "coverage": [
+                "Edge case / Typos",
+                "Misspelled words / Robustness",
+                "M (31-299 characters)",
+                "Typo tolerance"
+            ]
+        },
+        {
+            "id": "Neg_Fun_0008",
+            "name": "Special characters injection",
+            "input": "mama'; DROP TABLE users;-- yanawaa <script>alert(1)</script>",
+            "expected": "මම යනවා",
+            "lengthType": "M",
+            "coverage": [
+                "Edge case / Security",
+                "SQL/JS injection / Special characters",
+                "M (31-299 characters)",
+                "Input sanitization"
+            ]
+        },
+        {
+            "id": "Neg_Fun_0009",
+            "name": "Very long concatenated words",
+            "input": "mamagiyaaeyaakaalaabiwwaadhennaawaaennaawaakarannaabalannaa",
+            "expected": "මම ගියා ඒයා කාලා බිව්වා දෙන්නවා එන්නවා කරන්නවා බලන්නවා",
+            "lengthType": "M",
+            "coverage": [
+                "Edge case / Robustness",
+                "Many words concatenated / No spaces",
+                "M (31-299 characters)",
+                "Long string parsing"
+            ]
+        },
+        {
+            "id": "Neg_Fun_0010",
+            "name": "Backwards Singlish text",
+            "input": "aawanay aradheg amam aawanob arutahw",
+            "expected": "යනවා ගෙදර මම බොනවා වතුර",
+            "lengthType": "M",
+            "coverage": [
+                "Edge case / Reversed input",
+                "Backwards text / Robustness",
+                "M (31-299 characters)",
+                "Reversed text handling"
+            ]
+        }
+    ],
+    "ui_tests": [
+        {
+            "id": "Pos_UI_0001",
+            "name": "Real-time translation updates on typing",
+            "input": "mama gedara yanawaa",
+            "expected": "Real-time Sinhala output appears as user types each character",
+            "lengthType": "S",
+            "coverage": [
+                "UI behavior",
+                "Real-time update validation",
+                "S (≤30 characters)",
+                "UI responsiveness"
+            ]
+        }
+    ]
+}

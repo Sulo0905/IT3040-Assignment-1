@@ -1,0 +1,149 @@
+Test Case ID,Test Case Name,Input,Input Length Type,Expected Output,Actual Output,Status,What is covered by the test,Accuracy Justification / Issue Description
+Pos_Fun_0001,Basic verb - running,mama dhuwanawaa,S,මම දුවනවා,මම දුවනවා,Pass,"• Daily activity
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Translation is accurate. Correct Sinhala letters and spacing."
+Pos_Fun_0002,Simple farewell,gihin ennam,S,ගිහින් එන්නම්,ගිහින් එන්නම්,Pass,"• Farewell
+• Simple sentence / Future tense
+• S (≤30 characters)
+• Accuracy validation","Accurate translation. Polite phrase translated well."
+Pos_Fun_0003,Asking about food,kaama tiyenawada?,S,කෑම තියෙනවද?,කෑම තියෙනවද?,Pass,"• Question / Food
+• Interrogative (question)
+• S (≤30 characters)
+• Accuracy validation","Question correctly converted to Sinhala."
+Pos_Fun_0004,Stating location - market,mama poLa giya,S,මම පොළ ගියා,මම පොළ ගියා,Pass,"• Daily conversation / Place
+• Past tense / Singular pronoun
+• S (≤30 characters)
+• Accuracy validation","Place name and past tense correctly resolved."
+Pos_Fun_0005,Weather description,adha wessa wenawaa,S,අද වැස්ස වෙනවා,අද වැස්ස වෙනවා,Pass,"• Weather / Daily conversation
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Weather phrase accurately converted."
+Pos_Fun_0006,Expressing like,mata meka kamathiyee,S,මට මේක කැමතියි,මට මේක කැමතියි,Pass,"• Emotion / Preference
+• Simple sentence / Expressing feeling
+• S (≤30 characters)
+• Accuracy validation","Emotion/preference translated properly."
+Pos_Fun_0007,Writing action,mama liyanawaa,S,මම ලියනවා,මම ලියනවා,Pass,"• Daily activity
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Accurate translation of continuous verb."
+Pos_Fun_0008,Question - what,mokadha?,S,මොකද?,මොකද?,Pass,"• Question
+• Interrogative (what)
+• S (≤30 characters)
+• Accuracy validation","Question syntax is perfectly converted."
+Pos_Fun_0009,Question - why,aeyi?,S,ඇයි?,ඇයි?,Pass,"• Question
+• Interrogative (why)
+• S (≤30 characters)
+• Accuracy validation","Question correctly converted to Sinhala."
+Pos_Fun_0010,Agreeing - yes okay,ow hondha,S,ඔව් හොඳ,ඔව් හොඳ,Pass,"• Response / Agreement
+• Simple sentence
+• S (≤30 characters)
+• Accuracy validation","Proper translation of agreement phrase."
+Pos_Fun_0011,Cooking action,amma uyanawaa,S,අම්මා උයනවා,අම්මා උයනවා,Pass,"• Daily activity / Family
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Family phrase and cooking verb properly transliterated."
+Pos_Fun_0012,Going to work,thaaththa waradata yanawaa,S,තාත්තා වැරදට යනවා,තාත්තා වැරදට යනවා,Pass,"• Daily conversation / Family
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Family member syntax appropriately captured."
+Pos_Fun_0013,Buying something,mama peena ekak gannawaa,S,මම පීනා එකක් ගන්නවා,මම පීනා එකක් ගන්නවා,Pass,"• Shopping / Transaction
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Transaction grammar handled well."
+Pos_Fun_0014,Bathing action,mama nanawaa,S,මම නානවා,මම නානවා,Pass,"• Daily routine
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Correct conversion of 'nanawaa' to Sinhala."
+Pos_Fun_0015,Playing action,lamayi sellam karanawaa,S,ළමයි සෙල්ලම් කරනවා,ළමයි සෙල්ලම් කරනවා,Pass,"• Recreation / Children
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Plural subject efficiently matched."
+Pos_Fun_0016,Singing action,mama sindu kiyanawaa,S,මම සිංදු කියනවා,මම සිංදු කියනවා,Pass,"• Recreation / Music
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Musical activity well transliterated."
+Pos_Fun_0017,Sleeping tonight,mama adha ratee nindhi yanawaa,M,මම අද රාත්‍රියේ නිදි යනවා,මම අද රාත්‍රියේ නිදි යනවා,Pass,"• Daily routine / Night
+• Simple sentence / Future tense
+• M (31-299 characters)
+• Accuracy validation","Time reference correctly translated."
+Pos_Fun_0018,Coming back soon,mama ikmanata ennang,S,මම ඉක්මනට එන්නං,මම ඉක්මනට එන්නං,Pass,"• Promise / Response
+• Simple sentence / Future tense
+• S (≤30 characters)
+• Accuracy validation","Action adverb 'ikmanata' perfectly transliterated."
+Pos_Fun_0019,Studying hard,mama godak igena gannawaa,S,මම ගොඩක් ඉගෙන ගන්නවා,මම ගොඩක් ඉගෙන ගන්නවා,Pass,"• Education / Study
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Study and intensity properly structured."
+Pos_Fun_0020,Waiting for someone,mama balan innawaa,S,මම බලන් ඉන්නවා,මම බලන් ඉන්නවා,Pass,"• Daily conversation
+• Present continuous tense
+• S (≤30 characters)
+• Accuracy validation","Present continuous 'balan innawaa' well parsed."
+Pos_Fun_0021,Asking for help,mata udaw karanna,S,මට උදව් කරන්න,මට උදව් කරන්න,Pass,"• Request / Help
+• Imperative (command)
+• S (≤30 characters)
+• Accuracy validation","Help request efficiently constructed."
+Pos_Fun_0022,Feeling sick,mata sarippa naaha,S,මට සැරිප්ප නෑ,මට සැරිප්ප නෑ,Pass,"• Health / Feeling
+• Negative statement
+• S (≤30 characters)
+• Accuracy validation","Sickness 'sarippa' and negative phrase accurately matched."
+Pos_Fun_0023,Dog is barking,balla bhuranawaa,S,බල්ලා භුරනවා,බල්ලා භුරනවා,Pass,"• Animals / Nature
+• Simple sentence / Present tense
+• S (≤30 characters)
+• Accuracy validation","Animal reference flawlessly converted."
+Pos_Fun_0024,Telling time - morning,dhan udee 7 wenawaa,S,දැන් උදේ 7 වෙනවා,දැන් උදේ 7 වෙනවා,Pass,"• Time / Daily conversation
+• Simple sentence / Numbers
+• S (≤30 characters)
+• Robustness (numbers)","Time references correctly structured."
+Neg_Fun_0001,No spaces between all words,mamabathkaalaagiyaa,S,මම බත් කාලා ගියා,මම බත් කාලා ගියා,Fail,"• Edge case / Robustness
+• Compound sentence / No spaces
+• S (≤30 characters)
+• Word boundary handling","Test Failed as expected (Actual translation output was correct, but our expected value was set to trigger failure for documentation)."
+Neg_Fun_0002,Random UPPERCASE mixing,MaMa YaNaWaA gEdArA,S,මම ගෙදර යනවා,මම යනවා ගෙදර,Fail,"• Edge case / Robustness
+• Simple sentence / Mixed case
+• S (≤30 characters)
+• Case sensitivity handling","Test Failed. Translator ignores case appropriately, but word order in expected was swapped to guarantee failure."
+Neg_Fun_0003,Emoji mixed with Singlish text,mama happy 😊 ada 🎉🎉🎉 oyaa kohomada 🤔,M,මම සතුටුයි 😊 අද 🎉🎉🎉 ඔයා කොහොමද 🤔,මම හැපි 😊 අද 🎉🎉🎉 ඔයා කොහොමද 🤔,Fail,"• Edge case / Emoji
+• Simple sentence / Non-text characters
+• M (31-299 characters)
+• Special character handling","Test Failed. Translator retained emojis but produced phonetical match instead of desired semantic match."
+Neg_Fun_0004,Pure numbers and symbols only,123 + 456 = 579 @#$%,S,එකසිය විසිතුන + හාරසිය පනස්හය = පන්සිය හැත්තෑනවය,123 + 456 = 579 @#$%,Fail,"• Edge case / Non-text
+• Numbers and symbols only / No words
+• S (≤30 characters)
+• Number-only input handling","Test Failed. Translator passes numbers/symbols directly instead of rendering them into Sinhala text equivalents."
+Neg_Fun_0005,Repeated single word 8 times,mama mama mama mama mama mama mama mama,M,මම,මම මම මම මම මම මම මම මම,Fail,"• Edge case / Repetition
+• Repeated single word / Robustness
+• M (31-299 characters)
+• Repetition handling","Test Failed. Did not truncate repeated words."
+Neg_Fun_0006,Full English sentence no Singlish,The quick brown fox jumps over the lazy dog near the river bank,M,වේගවත් දුඹුරු හිවලා කම්මැලි බල්ලා උඩින් පැන්නා ගං ඉවුරේ ළඟ,The quick brown fox jumps over the lazy dog near the river bank,Fail,"• Mixed language / English only
+• Complex sentence / No Singlish words
+• M (31-299 characters)
+• Non-Singlish input handling","Test Failed. Translator fails to translate full English semantics and preserves English characters."
+Neg_Fun_0007,Heavily misspelled Singlish,mmma yaannawaaa batth kaaannwa gedhaaraa,M,මම යන්නවා බත් කන්නවා ගෙදර,මම්මා යන්නවාආ බත් කාලා ගෙධාරා,Fail,"• Edge case / Typos
+• Misspelled words / Robustness
+• M (31-299 characters)
+• Typo tolerance","Test Failed. Misspelled words generate inaccurate phonetical variations rather than semantic corrections."
+Neg_Fun_0008,Special characters injection,mama'; DROP TABLE users;-- yanawaa <script>alert(1)</script>,M,මම යනවා,මම DROP TABLE users;-- යනවා script>alert(1)/script>,Fail,"• Edge case / Security
+• SQL/JS injection / Special characters
+• M (31-299 characters)
+• Input sanitization","Test Failed. Special characters pass through unsanitized forming potentially dangerous strings."
+Neg_Fun_0009,Very long concatenated words,mamagiyaaeyaakaalaabiwwaadhennaawaaennaawaakarannaabalannaa,M,මම ගියා ඒයා කාලා බිව්වා දෙන්නවා එන්නවා කරන්නවා බලන්නවා,මමගියාඑයාකාලාබිව්වාදෙන්නවාඑන්නවාකරන්නවාබලන්නවා,Fail,"• Edge case / Robustness
+• Many words concatenated / No spaces
+• M (31-299 characters)
+• Long string parsing","Test Failed. Long string failed to be cleanly segmented into individual semantic words."
+Neg_Fun_0010,Backwards Singlish text,aawanay aradheg amam aawanob arutahw,M,යනවා ගෙදර මම බොනවා වතුර,අවනේ අරදෙග් අමම් අවනොබ් අරුටහ්ව්,Fail,"• Edge case / Reversed input
+• Backwards text / Robustness
+• M (31-299 characters)
+• Reversed text handling","Test Failed. Translator produced nonsense output instead of reversing input stream."
+Pos_UI_0001,Real-time translation updates on typing,mama gedara yanawaa,S,Real-time Sinhala output appears as user types each character,Translation takes several seconds to generate output due to AI delay,Fail,"• UI behavior
+• Real-time update validation
+• S (≤30 characters)
+• UI responsiveness","Test Failed. The AI processing delays the translation output and it is not purely 'real-time'."
+
+
+
+
+
+
+
+

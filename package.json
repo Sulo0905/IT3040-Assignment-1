@@ -1,0 +1,17 @@
+{
+  "name": "sinhala-translator-testing",
+  "version": "1.0.0",
+  "description": "IT3040 Assignment 1 - Automated testing for Singlish to Sinhala translator",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report"
+  },
+  "keywords": ["playwright", "testing", "sinhala", "translator"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}
