@@ -7,3 +7,9 @@ node_modules/
 package-lock.json
 *.log
 .DS_Store
+generate-exel.js
+generate-csv.js
+Final_TestCases_Output.csv
+test-output-results.json
+Assignment 1 - Test cases.xlsx
+assignment_v2.md

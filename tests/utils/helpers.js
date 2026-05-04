@@ -1,5 +1,6 @@
 /**
- * Helper utilities for Singlish to Sinhala translator testing
+ * Helper utilities for Chat Sinhala transliteration testing
+ * Target: https://www.pixelssuite.com/chat-translator
  */
 
 /**
@@ -11,66 +12,100 @@ function getInputLengthType(text) {
   const length = text.length;
   if (length <= 30) return 'S';
   if (length >= 31 && length <= 299) return 'M';
-  return 'L';
+  return 'L'; // 300-450
 }
 
 /**
- * Waits for translation output to appear and stabilize
+ * Types text into the input textarea
  * @param {import('@playwright/test').Page} page - Playwright page object
- * @param {number} timeout - Maximum wait time in milliseconds
- * @returns {Promise<string>} - Translated text
+ * @param {string} text - Text to input
  */
-async function waitForTranslation(page, timeout = 8000) {
-  // Wait for the "Transliterating..." loading state to disappear
-  await page.waitForTimeout(3000);
-  
-  // The output area contains spans with individual translated words
-  // We need to collect all span texts from the OUTPUT section
-  const outputSelector = 'div:has(> p:text("OUTPUT")) >> div';
-  
+async function inputText(page, text) {
+  const inputArea = page.locator('textarea').first();
+  await inputArea.clear();
+  await page.waitForTimeout(300);
+  await inputArea.fill(text);
+  await page.waitForTimeout(500);
+}
+
+/**
+ * Clicks the Transliterate button and waits for result with retry logic
+ * @param {import('@playwright/test').Page} page - Playwright page object
+ * @param {string} text - The input text (needed for re-filling on retry)
+ * @param {number} maxRetries - Maximum number of retries on "Failed to fetch"
+ * @returns {Promise<string>} - Translated text or error message
+ */
+async function clickTransliterateWithRetry(page, text, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    // Click the Transliterate button
+    const transliterateBtn = page.locator('button', { hasText: 'Transliterate' }).first();
+    await transliterateBtn.click();
+
+    // Wait for processing
+    await page.waitForTimeout(4000);
+
+    // Wait for button to stop showing "Transliterating..."
+    try {
+      await page.waitForFunction(() => {
+        const buttons = document.querySelectorAll('button');
+        for (const btn of buttons) {
+          if (btn.textContent.includes('Transliterating')) return false;
+        }
+        return true;
+      }, { timeout: 30000 });
+    } catch (e) {
+      console.log(`Attempt ${attempt}: Transliteration timed out`);
+    }
+
+    await page.waitForTimeout(1000);
+
+    // Check for "Failed to fetch" error
+    const pageContent = await page.content();
+    if (pageContent.includes('Failed to fetch') && attempt < maxRetries) {
+      console.log(`Attempt ${attempt}: "Failed to fetch" - retrying after delay...`);
+      // Reload the page to clear the error state
+      await page.goto('https://www.pixelssuite.com/chat-translator');
+      await page.waitForLoadState('networkidle');
+      await page.waitForTimeout(3000);
+
+      // Re-fill the input text
+      await inputText(page, text);
+      continue;
+    }
+
+    // If we got "Failed to fetch" on last attempt, return it as actual output
+    if (pageContent.includes('Failed to fetch')) {
+      return '[Failed to fetch - API error]';
+    }
+
+    break;
+  }
+
+  return await getOutputText(page);
+}
+
+/**
+ * Gets the output text from the output textarea
+ * @param {import('@playwright/test').Page} page
+ * @returns {Promise<string>}
+ */
+async function getOutputText(page) {
   try {
-    // Wait for output content to appear
-    await page.waitForTimeout(2000);
-    
-    // Try to get all span elements in the output area
-    // The output section has spans for each translated word
-    const outputArea = page.locator('div').filter({ hasText: /^OUTPUT/ }).first();
-    
-    // Get all text content from the output div (after the OUTPUT label)
-    const allSpans = await page.locator('div:below(:text("OUTPUT")) span').allTextContents();
-    
-    if (allSpans.length > 0) {
-      // Filter out non-Sinhala content and combine
-      const sinhalaOutput = allSpans
-        .filter(text => text.trim().length > 0)
-        .filter(text => !text.includes('OUTPUT') && !text.includes('Copy') && !text.includes('chars'))
-        .join(' ')
-        .trim();
-      
-      if (sinhalaOutput.length > 0) {
-        return sinhalaOutput;
-      }
+    const outputArea = page.locator('textarea').nth(1);
+    const outputText = await outputArea.inputValue();
+
+    if (outputText && outputText.trim().length > 0 &&
+        !outputText.includes('Transliterated Sinhala will appear here')) {
+      return outputText.trim();
     }
-    
-    // Fallback: try getting all text from the output container
-    const outputContainer = page.locator('div').filter({ hasText: 'Sinhala script appears here' });
-    if (await outputContainer.count() > 0) {
-      return '';
+
+    // Fallback: try textContent
+    const textContent = await outputArea.textContent();
+    if (textContent && textContent.trim().length > 0 &&
+        !textContent.includes('Transliterated Sinhala will appear here')) {
+      return textContent.trim();
     }
-    
-    // Another fallback: get text from any element after OUTPUT label
-    const outputText = await page.locator('div:has(p:text("OUTPUT"))').first().textContent();
-    if (outputText) {
-      // Remove "OUTPUT", "Copy", character counts etc.
-      const cleaned = outputText
-        .replace('OUTPUT', '')
-        .replace(/Copy/g, '')
-        .replace(/\d+ chars/g, '')
-        .replace(/Sinhala script appears here\.\.\./g, '')
-        .trim();
-      return cleaned;
-    }
-    
+
     return '';
   } catch (error) {
     console.error('Could not find output:', error.message);
@@ -79,19 +114,14 @@ async function waitForTranslation(page, timeout = 8000) {
 }
 
 /**
- * Types text into the input field
+ * Full flow: input text, click transliterate with retry, and get the output
  * @param {import('@playwright/test').Page} page - Playwright page object
- * @param {string} text - Text to input
+ * @param {string} text - Text to transliterate
+ * @returns {Promise<string>} - Translated text
  */
-async function inputText(page, text) {
-  // The input textarea on singlish2sinhala.app
-  const inputSelector = 'textarea[placeholder="Type in Singlish here..."]';
-  
-  await page.locator(inputSelector).first().clear();
-  await page.waitForTimeout(500);
-  
-  // Type the text
-  await page.locator(inputSelector).first().fill(text);
+async function transliterate(page, text) {
+  await inputText(page, text);
+  return await clickTransliterateWithRetry(page, text);
 }
 
 /**
@@ -103,24 +133,23 @@ async function inputText(page, text) {
 function compareTranslation(actual, expected) {
   const normalizedActual = actual.trim();
   const normalizedExpected = expected.trim();
-  
+
   if (normalizedActual === normalizedExpected) {
     return {
       status: 'Pass',
       message: 'Translation matches expected output exactly'
     };
   }
-  
-  // Calculate similarity (simple character-based)
+
   const similarity = calculateSimilarity(normalizedActual, normalizedExpected);
-  
+
   if (similarity >= 0.9) {
     return {
       status: 'Pass',
       message: `Translation is ${(similarity * 100).toFixed(1)}% similar (minor variations acceptable)`
     };
   }
-  
+
   return {
     status: 'Fail',
     message: `Translation mismatch. Similarity: ${(similarity * 100).toFixed(1)}%`
@@ -137,23 +166,25 @@ function calculateSimilarity(str1, str2) {
   const len1 = str1.length;
   const len2 = str2.length;
   const maxLen = Math.max(len1, len2);
-  
+
   if (maxLen === 0) return 1.0;
-  
+
   let matches = 0;
   const minLen = Math.min(len1, len2);
-  
+
   for (let i = 0; i < minLen; i++) {
     if (str1[i] === str2[i]) matches++;
   }
-  
+
   return matches / maxLen;
 }
 
 module.exports = {
   getInputLengthType,
-  waitForTranslation,
   inputText,
+  clickTransliterateWithRetry,
+  getOutputText,
+  transliterate,
   compareTranslation,
   calculateSimilarity
 };

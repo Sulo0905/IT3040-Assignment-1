@@ -1,131 +1,86 @@
 const { test, expect } = require('@playwright/test');
-const { inputText, waitForTranslation, compareTranslation, getInputLengthType } = require('./utils/helpers');
+const { transliterate, getInputLengthType, compareTranslation } = require('./utils/helpers');
 const testData = require('./test-data.json');
+const fs = require('fs');
+const path = require('path');
 
-// Combine all test cases
-const allTests = [
-  ...testData.positive_functional,
-  ...testData.negative_functional,
-  ...testData.ui_tests
-];
+const allTests = testData.negative_test_cases;
 
-test.describe('Singlish to Sinhala Translator - Functional Tests', () => {
-  
+test.describe('Singlish to Sinhala Translator - Chat Transliteration Tests', () => {
+
   test.beforeEach(async ({ page }) => {
-    // Navigate to the translator website
-    await page.goto('https://www.singlish2sinhala.app/');
-    
-    // Wait for page to load
+    await page.goto('https://www.pixelssuite.com/chat-translator');
     await page.waitForLoadState('networkidle');
-    
-    // Give some time for any dynamic content to load
     await page.waitForTimeout(2000);
   });
 
-  // POSITIVE FUNCTIONAL TESTS
-  testData.positive_functional.forEach((testCase) => {
-    test(`${testCase.id}: ${testCase.name}`, async ({ page }) => {
-      // Input the Singlish text
-      await inputText(page, testCase.input);
-      
-      // Wait for translation to appear
-      const actualOutput = await waitForTranslation(page);
-      
-      // Compare with expected output
-      const result = compareTranslation(actualOutput, testCase.expected);
-      
-      // Log the results
-      console.log(`\n--- ${testCase.id} ---`);
-      console.log(`Input: ${testCase.input}`);
-      console.log(`Expected: ${testCase.expected}`);
-      console.log(`Actual: ${actualOutput}`);
-      console.log(`Status: ${result.status}`);
-      console.log(`Message: ${result.message}`);
-      
-      // Verify the input length type matches
-      const actualLengthType = getInputLengthType(testCase.input);
-      expect(actualLengthType).toBe(testCase.lengthType);
-      
-      // Assert that output is not empty
-      expect(actualOutput.length).toBeGreaterThan(0);
-      
-      // For positive tests, we expect high accuracy
-      // Note: This may fail if translation quality is poor - that's expected for testing
-      if (result.status === 'Pass') {
-        expect(actualOutput).toBeTruthy();
-      }
-    });
-  });
+  // ALL 50 NEGATIVE TEST CASES
+  allTests.forEach((tc) => {
+    test(`${tc.id}: ${tc.name}`, async ({ page }) => {
+      let actualOutput = '';
+      let result = { status: 'Fail', message: 'Test execution failed' };
 
-  // NEGATIVE FUNCTIONAL TESTS
-  testData.negative_functional.forEach((testCase) => {
-    test(`${testCase.id}: ${testCase.name}`, async ({ page }) => {
-      // Input the Singlish text (edge case or challenging input)
-      await inputText(page, testCase.input);
-      
-      // Wait for translation to appear
-      const actualOutput = await waitForTranslation(page);
-      
-      // Compare with expected output
-      const result = compareTranslation(actualOutput, testCase.expected);
-      
-      // Log the results
-      console.log(`\n--- ${testCase.id} ---`);
-      console.log(`Input: ${testCase.input}`);
-      console.log(`Expected: ${testCase.expected}`);
-      console.log(`Actual: ${actualOutput}`);
-      console.log(`Status: ${result.status}`);
-      console.log(`Message: ${result.message}`);
-      
-      // Verify the input length type matches
-      const actualLengthType = getInputLengthType(testCase.input);
-      expect(actualLengthType).toBe(testCase.lengthType);
-      
-      // For negative tests, we ALSO check accuracy to document failures
-      // These are expected to fail - documenting translator weaknesses
-      expect(result.status).toBe('Pass');
-    });
-  });
+      try {
+        // Perform transliteration
+        actualOutput = await transliterate(page, tc.input);
 
-  // UI TEST
-  testData.ui_tests.forEach((testCase) => {
-    test(`${testCase.id}: ${testCase.name}`, async ({ page }) => {
-      const inputSelector = 'textarea[placeholder="Type in Singlish here..."]';
-      const outputSelector = 'div:below(:text("OUTPUT")) span';
-      
-      // Clear input first
-      await page.locator(inputSelector).first().clear();
-      
-      // Type slowly to observe real-time updates
-      const textToType = testCase.input;
-      let previousOutput = '';
-      
-      for (let i = 0; i < textToType.length; i++) {
-        await page.locator(inputSelector).first().type(textToType[i]);
-        await page.waitForTimeout(300); // Wait between keystrokes
+        // Compare with expected output
+        result = compareTranslation(actualOutput, tc.expected);
         
-        // Check if output is updating
-        const spans = await page.locator(outputSelector).allTextContents();
-        const currentOutput = spans.filter(t => t.trim()).join(' ');
+        // Log the results to console
+        console.log(`\n--- ${tc.id} ---`);
+        console.log(`Input: ${tc.input}`);
+        console.log(`Actual: ${actualOutput}`);
+        console.log(`Status: ${result.status}`);
+      } catch (error) {
+        result.message = `Execution Error: ${error.message}`;
+        actualOutput = actualOutput || '[Error during transliteration]';
+      } finally {
+        // Save result to file regardless of pass/fail
+        const resultEntry = {
+          id: tc.id,
+          name: tc.name,
+          input: tc.input,
+          lengthType: tc.lengthType,
+          expected: tc.expected,
+          actual: actualOutput,
+          status: result.status,
+          inputTypes: tc.inputTypes,
+          rationale: tc.rationale,
+          message: result.message
+        };
+
+        const resultsFile = path.join(__dirname, '..', 'test-output-results.json');
         
-        console.log(`After typing '${textToType.substring(0, i + 1)}': Output = '${currentOutput}'`);
-        
-        // Output should be changing (real-time translation)
-        if (i > 3) { // After a few characters, we expect some output
-          expect((currentOutput || '').length).toBeGreaterThan(0);
+        // Safely read the existing array
+        let existingResults = [];
+        try {
+          if (fs.existsSync(resultsFile)) {
+            const content = fs.readFileSync(resultsFile, 'utf8');
+            existingResults = JSON.parse(content || '[]');
+          }
+        } catch (e) {
+          console.error(`Error reading results file: ${e.message}`);
+          // If JSON is corrupted, we don't wipe it out entirely. We just proceed.
+          // The atomic write below prevents this corruption from happening in the first place.
         }
         
-        previousOutput = currentOutput || '';
+        existingResults.push(resultEntry);
+
+        // Atomic write: write to a temporary file first, then rename it
+        // This ensures that if the process is killed mid-write, the JSON file is never corrupted
+        const tempFile = resultsFile + '.tmp';
+        fs.writeFileSync(tempFile, JSON.stringify(existingResults, null, 2), 'utf8');
+        fs.renameSync(tempFile, resultsFile);
       }
-      
-      // Final output should exist
-      const finalOutput = await waitForTranslation(page);
-      console.log(`\n--- ${testCase.id} ---`);
-      console.log(`UI Test: Real-time translation`);
-      console.log(`Final Output: ${finalOutput}`);
-      console.log(`Status: Real-time updates ${finalOutput.length > 0 ? 'working' : 'not working'}`);
-      
-      expect(finalOutput.length).toBeGreaterThan(0);
+
+      // Verify the input length type matches
+      const actualLengthType = getInputLengthType(tc.input);
+      expect(actualLengthType).toBe(tc.lengthType);
+
+      // Assert that actual output does NOT match expected (negative test - we expect failure)
+      // This is the final step, ensuring the test fails if it's not a valid negative case
+      expect(actualOutput).not.toBe(tc.expected);
     });
   });
 

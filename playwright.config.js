@@ -12,7 +12,7 @@ module.exports = defineConfig({
     ['list']
   ],
   use: {
-    baseURL: 'https://www.singlish2sinhala.app/',
+    baseURL: 'https://www.pixelssuite.com/chat-translator',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -22,7 +22,12 @@ module.exports = defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { 
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          args: ['--disable-web-security']
+        }
+      },
     },
   ],
 

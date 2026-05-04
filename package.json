@@ -8,10 +8,18 @@
     "test:debug": "playwright test --debug",
     "report": "playwright show-report"
   },
-  "keywords": ["playwright", "testing", "sinhala", "translator"],
+  "keywords": [
+    "playwright",
+    "testing",
+    "sinhala",
+    "translator"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.40.0"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
   }
 }
